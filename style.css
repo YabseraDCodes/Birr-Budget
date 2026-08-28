@@ -17,14 +17,24 @@ body {
 
 }
 
-.top-section span {
-    background-color: #fff;
-    display: inline-block;
-    text-align: center;
-    width: 25px;
+
+.icon-circle {
+    width: 30px;
     height: 25px;
-    border-radius: 50px;
+    /* border-radius: 50%; */
+
+    /* background-color: #e6e6e6; */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.icon-circle i {
+    font-size: 23px;
+    color: #fff;
+}
+
 
 .top-section {
     display: flex;
@@ -84,7 +94,7 @@ body {
 }
 
 #modal {
-    display: flex;
+    display: none;
     position: fixed;
     inset: 0;
     justify-content: center;
@@ -175,10 +185,19 @@ body {
     overflow: hidden;
 }
 
+.hr-line {
+    margin-top: 15px;
+    display: block;
+    background-color: #000000d5;
+    height: 5px;
+    width: 50px;
+    border-radius: 10px;
+}
+
 .transaction-section h3 {
     font-weight: 500;
     font-size: 15px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     /* margin-top: 10px;
     margin-bottom: 10px; */
 }

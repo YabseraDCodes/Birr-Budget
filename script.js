@@ -1,13 +1,64 @@
 const state = {
     balance: 0,
     transactions: [],
-    expense_catagories: ["Food", "Transportation", "Utilities", "Entertainment", "Shopping", "Other"],
-    income_catagories: ["Salary", "Freelance", "Business", "Investments", "Other"],
+    // expense_catagories: ["Food", "Transportation", "Utilities", "Entertainment", "Shopping", "Other"],
+    // income_catagories: ["Salary", "Freelance", "Business", "Investments", "Other"],
+
+    expense_catagories: [
+    {
+        type: "Food",
+        icon: "fa-solid fa-burger"
+    },
+    {
+        type: "Transportation",
+        icon: "fa-solid fa-taxi"
+    },
+    {
+        type: "Utility",
+        icon: "fa-solid fa-hammer"
+    },
+    {
+        type: "Shopping",
+        icon: "fa-solid fa-basket-shopping"
+    },
+    {
+        type: "Other",
+        icon: "fa-solid fa-shapes"
+    }
+],
+
+income_catagories: [
+    {
+        type: "Salary",
+        icon: "fa-solid fa-hand-holding-dollar"
+    },
+    {
+        type: "Freelance",
+        icon: "fa-solid fa-laptop-code"
+    },
+    {
+        type: "Investment",
+        icon: "fa-solid fa-chart-line"
+    },
+    {
+        type: "Gift",
+        icon: "fa-solid fa-gift"
+    },
+    {
+        type: "Refund",
+        icon: "fa-solid fa-rotate-left"
+    },
+    {
+        type: "Other",
+        icon: "fa-solid fa-shapes"
+    }
+],
+
     current_action: "",
 };
 
-current_balance = state.balance;
-transactions = state.transactions;
+// current_balance = state.balance;
+// transactions = state.transactions;
 
 const display_balance = document.querySelector("#balance");
 const display_transactions = document.querySelector("#transaction-handler");
@@ -25,12 +76,12 @@ function render() {
     display_balance.textContent = `${state.balance} ETB`;
     display_transactions.innerHTML = state.transactions.map((item) => rendertransactions(item)).join("");
     if (state.current_action === "add_income") {
-        catagory_handler.innerHTML = state.income_catagories.map((item)=> {
+        catagory_handler.innerHTML = state.income_catagories.map((item) => {
             return renderCatagory(item);
         });
         form_title.textContent = "Add Income"
     } else if (state.current_action === "make_expense") {
-        catagory_handler.innerHTML = state.expense_catagories.map((item)=> {
+        catagory_handler.innerHTML = state.expense_catagories.map((item) => {
             return renderCatagory(item);
         });
         form_title.textContent = "Make Expense"
@@ -44,7 +95,7 @@ form.addEventListener("submit", (e) => {
     const catagory = catagory_handler.value;
     if (state.current_action === "add_income") {
         makeIncome(amount, catagory);
-    } else if (state.current_action === "make_expense"){
+    } else if (state.current_action === "make_expense") {
         makeExpense(amount, catagory);
     }
     console.log(calendar.value);
@@ -71,7 +122,7 @@ expensebtn.addEventListener("click", () => {
 })
 
 function renderCatagory(catagory) {
-    return `<option value="${catagory}">${catagory}</option>`
+    return `<option value="${catagory.type}">${catagory.type}</option>`
 }
 
 function rendertransactions(item) {
@@ -95,7 +146,7 @@ function rendertransactions(item) {
             </article>`
 }
 
-function setToday(){
+function setToday() {
     calendar.value = new Date().toISOString().split("T")[0];
 }
 
@@ -111,7 +162,7 @@ function makeExpense(amount, catagory) {
     console.log(typeof date, "----------------", formattedDate);
 
 
-    const check = state.expense_catagories.some((item) => item === catagory);
+    const check = state.expense_catagories.some((item) => item.type === catagory);
     if (!check) {
         console.error("Non existing catagory");
     } else {
@@ -137,7 +188,7 @@ function makeIncome(amount, catagory) {
         month: "short"
     });
 
-    const check = state.income_catagories.some((item) => item === catagory);
+    const check = state.income_catagories.some((item) => item.type === catagory);
     if (!check) {
         console.error("Non existing catagory");
     } else {
@@ -163,7 +214,7 @@ function loadState() {
     state.transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 }
 
-function clearState(){
+function clearState() {
     state.balance = 0;
     state.transactions = [];
 
