@@ -5,54 +5,54 @@ const state = {
     // income_catagories: ["Salary", "Freelance", "Business", "Investments", "Other"],
 
     expense_catagories: [
-    {
-        type: "Food",
-        icon: "fa-solid fa-burger"
-    },
-    {
-        type: "Transportation",
-        icon: "fa-solid fa-taxi"
-    },
-    {
-        type: "Utility",
-        icon: "fa-solid fa-hammer"
-    },
-    {
-        type: "Shopping",
-        icon: "fa-solid fa-basket-shopping"
-    },
-    {
-        type: "Other",
-        icon: "fa-solid fa-shapes"
-    }
-],
+        {
+            type: "Food",
+            icon: "fa-solid fa-burger"
+        },
+        {
+            type: "Transportation",
+            icon: "fa-solid fa-taxi"
+        },
+        {
+            type: "Utility",
+            icon: "fa-solid fa-hammer"
+        },
+        {
+            type: "Shopping",
+            icon: "fa-solid fa-basket-shopping"
+        },
+        {
+            type: "Other",
+            icon: "fa-solid fa-shapes"
+        }
+    ],
 
-income_catagories: [
-    {
-        type: "Salary",
-        icon: "fa-solid fa-hand-holding-dollar"
-    },
-    {
-        type: "Freelance",
-        icon: "fa-solid fa-laptop-code"
-    },
-    {
-        type: "Investment",
-        icon: "fa-solid fa-chart-line"
-    },
-    {
-        type: "Gift",
-        icon: "fa-solid fa-gift"
-    },
-    {
-        type: "Refund",
-        icon: "fa-solid fa-rotate-left"
-    },
-    {
-        type: "Other",
-        icon: "fa-solid fa-shapes"
-    }
-],
+    income_catagories: [
+        {
+            type: "Salary",
+            icon: "fa-solid fa-hand-holding-dollar"
+        },
+        {
+            type: "Freelance",
+            icon: "fa-solid fa-laptop-code"
+        },
+        {
+            type: "Investment",
+            icon: "fa-solid fa-chart-line"
+        },
+        {
+            type: "Gift",
+            icon: "fa-solid fa-gift"
+        },
+        {
+            type: "Refund",
+            icon: "fa-solid fa-rotate-left"
+        },
+        {
+            type: "Other",
+            icon: "fa-solid fa-shapes"
+        }
+    ],
 
     current_action: "",
 };
@@ -128,16 +128,25 @@ function renderCatagory(catagory) {
 function rendertransactions(item) {
     let incomeORexpense = "";
     let color = "";
+    let getIcon = "";
     if (item.type === "income") {
         incomeORexpense = "+";
         color = "rgb(0, 190, 0)";
+        getIcon = state.income_catagories.find(obj => obj.type === item.catagory);
+        console.log(getIcon.type, '-----');
     } else {
         incomeORexpense = "-";
         color = "red";
+        getIcon = state.expense_catagories.find(obj => obj.type === item.catagory);
+        console.log(typeof getIcon, '-----');
+    }
+
+    if (!getIcon) {
+        console.error("No matching category:", item.catagory);
     }
 
     return `<article class="transaction">
-                <span id="icon"></span>
+                <i class='${getIcon?.icon || ""} icon icon-${getIcon.type}' id='icon'></i>
                 <div class="transaction-type">
                     <h3 class="transaction-name">${item.catagory}</h3>
                     <p class="transaction-date">${item.date}</p>
@@ -227,6 +236,7 @@ function init() {
     current_balance = 100;
     makeExpense(20, "Food");
     makeIncome(100, "Salary")
+    makeIncome(40, "Refund")
     // clearState();
     // render()
 }

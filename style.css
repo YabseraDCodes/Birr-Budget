@@ -240,13 +240,15 @@ body {
     border-radius: 10px;
 }
 
-.transaction span {
-    background-color: gray;
-    display: inline-block;
-    text-align: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50px;
+/* icon cirlce here */
+.transaction i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background-color: #f0f0f0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .transaction-type {
@@ -263,4 +265,58 @@ body {
 .transaction-date {
     font-size: 15px;
     color: rgb(87, 87, 87);
+}
+
+
+
+
+.icon-Salary {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.icon-Freelance {
+    background-color: #e0f7fa;
+    color: #00838f;
+}
+
+.icon-Investment {
+    background-color: #e8eaf6;
+    color: #3949ab;
+}
+
+.icon-Gift {
+    background-color: #fff8e1;
+    color: #f9a825;
+}
+
+.icon-Refund {
+    background-color: #e0f2f1;
+    color: #00897b;
+}
+
+
+.icon-Food {
+    background-color: #e0f1ff;
+    color: #f57c00;
+}
+
+.icon-Transportation {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.icon-Utility {
+    background-color: #f3e5f5;
+    color: #8e24aa;
+}
+
+.icon-Shopping {
+    background-color: #fce4ec;
+    color: #d81b60;
+}
+
+.icon-Other {
+    background-color: #eceff1;
+    color: #546e7a;
 }
