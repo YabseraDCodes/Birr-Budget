@@ -7,70 +7,76 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Birr Budget</title>
 </head>
 
 <body>
-    <section class="head">
-        <div class="top-section">
-            <div>
-            <h2>Hi Yabsera</h2>
-            <h5>Welcome back to Birr Budget</h5>
+    <main class="app">
+        <section class="head">
+            <div class="top-section">
+                <div>
+                    <h2>Hi Yabsera</h2>
+                    <h5>Welcome back to Birr Budget</h5>
+                </div>
+                <span class="icon-circle">
+                    <!-- <i class="fa-solid fa-user" id="profile-icon"></i> -->
+                    <!-- <i class="fa-solid fa-wallet"></i> -->
+                    <!-- <i class="fa-solid fa-money-bills"></i> -->
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <!-- <i class="fa-solid fa-sack-dollar"></i> -->
+                </span>
+
+                <!-- <span  class="fa-solid fa-user"></span> -->
             </div>
-            <span class="icon-circle">
-                <!-- <i class="fa-solid fa-user" id="profile-icon"></i> -->
-                 <!-- <i class="fa-solid fa-wallet"></i> -->
-                 <!-- <i class="fa-solid fa-money-bills"></i> -->
-                 <i class="fa-solid fa-money-check-dollar"></i>
-                 <!-- <i class="fa-solid fa-sack-dollar"></i> -->
-            </span>
-            
-            <!-- <span  class="fa-solid fa-user"></span> -->
-        </div>
-        <div class="balance">
-            <h3>Current Balance:</h3>
-            <h1 id="balance">11,200.00    ETB</h1>
-            <h4>2000 ETB spent this week</h4>
-        </div>
-        <div class="income-expense">
-            <a class="btn-income" id="incomebtn">Add Income</a>
-            <a class="btn-expense" id="expensebtn">Add Expense</a>
-        </div>
-        <div id="modal">
-            <div id="modal-content">
-                <button class="close-btn" id="closebtn">&times;</button>
-                <h2 id="transaction-title"></h2>
-                <form id="transaction-form">
-                    <label>Amount</label>
-                    <input type="number" id="amount" placeholder="Enter amount">
-                    <label>Catagory</label>
-                    <select id="catagory">
-                        <option value="Salary">Salary</option>
-                        <option value="wd">wd</option>
-                    </select>
-                    <label>Date</label>
-                    <input type="date" id="date">
-                    <button type="submit">Save Transaction</button>
-                </form>
+            <div class="balance">
+                <h3>Current Balance:</h3>
+                <h1 id="balance">11,200.00 ETB</h1>
+                <h4 id="today-expense">2000 ETB spent this week</h4>
             </div>
-        </div>
-    </section>
-    <section class="transaction-section">
-        <span class="hr-line"></span>
-        <h3>Transaction</h3>
-        <div class="transaction-handler" id="transaction-handler">
-            
-        </div>
-    </section>
-    <!-- <footer>
-        <a href="#" style="color: rgb(25, 160, 25);">Home</a>
-        <a href="#">statistics</a>
-        <a href="#">Note</a>
-    </footer> -->
+            <div class="income-expense">
+                <a class="btn-income" id="incomebtn">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Income</a>
+                <a class="btn-expense" id="expensebtn">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    Expense</a>
+            </div>
+            <div id="modal">
+                <div id="modal-content">
+                    <button class="close-btn" id="closebtn">&times;</button>
+                    <h2 id="transaction-title"></h2>
+                    <form id="transaction-form">
+                        <label>Amount</label>
+                        <input type="number" id="amount" placeholder="Enter amount">
+                        <label>Catagory</label>
+                        <select id="catagory">
+                            <option value="Salary">Salary</option>
+                            <option value="wd">wd</option>
+                        </select>
+                        <label>Date</label>
+                        <input type="date" id="date">
+                        <button type="submit">Save Transaction</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="transaction-section">
+            <span class="hr-line"></span>
+            <h3 class="transaction-title">Transaction</h3>
+            <div class="transaction-handler" id="transaction-handler">
+
+            </div>
+        </section>
+        <!-- <footer>
+            <a href="#" style="color: rgb(25, 160, 25);">Home</a>
+            <a href="#">statistics</a>
+            <a href="#">Note</a>
+        </footer> -->
+    </main>
     <script src="script.js"></script>
 </body>
 

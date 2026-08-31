@@ -6,8 +6,15 @@
 
 body {
     font-family: 'Roboto';
+    /* font-family: 'Gabriela'; */
     /* padding: 10px; */
     background: #000;
+    height: 100%;
+    /* align-items: center; */
+}
+
+.app {
+    display: grid;
 }
 
 .head {
@@ -82,15 +89,25 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
+    width: 100%;
 }
 
 .income-expense a {
-    display: inline-block;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
     background-color: #fff;
     color: #000;
-    padding: 8px 35px;
+    padding: 10px 8px;
     border-radius: 6px;
     font-weight: 700;
+}
+
+.income-expense a i {
+    font-size: 13px;
 }
 
 #modal {
@@ -194,7 +211,7 @@ body {
     border-radius: 10px;
 }
 
-.transaction-section h3 {
+.transaction-title {
     font-weight: 500;
     font-size: 15px;
     /* margin-top: 10px; */
@@ -254,6 +271,8 @@ body {
 .transaction-type {
     display: flex;
     flex-direction: column;
+    margin-right: auto;
+    margin-left: 10px;
 }
 
 .transaction h3 {
@@ -320,3 +339,176 @@ body {
     background-color: #eceff1;
     color: #546e7a;
 }
+
+
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        min-height: 100vh;
+    }
+
+    .app {
+        /* margin-top: 20px; */
+        width: 90%;
+        max-width: 1200px;
+        height: 100vh;
+        /* height: calc(100vh - 40px); */
+        /* min-height: 100vh; */
+        grid-template-columns: 375px 1fr;
+        gap: 2rem;
+    }
+
+    .head {
+        padding-top: 30px;
+        max-width: 500px;
+    }
+
+    .balance {
+        padding: 20px;
+        margin: 20px 0px 20px 0px;
+    }
+
+    .balance h3 {
+        font-weight: 500;
+        font-size: 19px;
+    }
+
+    .balance h1 {
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 30px;
+    }
+
+    .balance h4 {
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 6px;
+        color: #2b2b2b;
+    }
+
+    .income-expense {
+        margin-bottom: 40px;
+    }
+
+    .income-expense a {
+        padding: 13px 8px;
+        border: 1px solid #fff;
+        transition: 0.2s ease;
+    }
+
+    .income-expense a:hover {
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #fff;
+        border-color: #fff;
+        /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); */
+    }
+
+    .income-expense a:active {
+        transform: scale(0.97);
+    }
+
+    #modal {
+        display: block;
+        position: static;
+        inset: auto;
+    }
+
+    #modal-content {
+        position: static;
+        width: 100%;
+        margin: 20px auto;
+        padding: 0px;
+        background-color: #000;
+        color: #fff;
+        border-radius: 12px;
+
+
+    }
+
+    #modal-content input {
+        width: 100%;
+    }
+
+    #modal-content label {
+        /* font-size: 30px; */
+    }
+
+    #transaction-form {
+        width: 100%;
+    }
+
+    #transaction-form input,
+    #transaction-form select {
+        padding: 12px;
+        /* width: 100%; */
+        /* box-sizing: border-box; */
+    }
+
+
+    .close-btn {
+        display: none;
+    }
+
+    .hr-line {
+        display: none;
+    }
+
+    .transaction-section {
+        padding-top: 10px;
+        border-radius: 0;
+        height: 100%;
+    }
+
+    .transaction-title {
+        font-weight: 800;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 90%;
+    }
+
+    .transaction-handler {
+        border-radius: 0;
+        height: 90%;
+        /* flex: 1; */
+        min-height: 0;
+        max-height: none;
+    }
+
+    #transaction-form button {
+        width: 100%;
+        padding: 13px 16px;
+        margin-top: 15px;
+
+        background-color: #fff;
+        color: #000;
+
+        border: 2px solid #fff;
+        border-radius: 8px;
+
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    #transaction-form button:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #fff;
+    }
+
+    #transaction-form button:active {
+        transform: scale(0.97);
+    }
+
+}
+
+
+/* modal-content max-width needs to disapear
+if I want the higher resolution version to be
+taking entire modal width */

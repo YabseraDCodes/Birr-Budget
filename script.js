@@ -54,7 +54,8 @@ const state = {
         }
     ],
 
-    current_action: "",
+    current_action: "add_income",
+    today_expense: 0,
 };
 
 // current_balance = state.balance;
@@ -71,8 +72,11 @@ const form_title = document.querySelector("#transaction-title");
 const modal = document.querySelector("#modal");
 const closebtn = document.querySelector("#closebtn");
 const calendar = document.querySelector("#date");
+const today_expense = document.querySelector("#today-expense");
 
 function render() {
+    state.today_expense = getTodayExpense();
+    today_expense.textContent = `${state.today_expense} ETB spent today`
     display_balance.textContent = `${state.balance} ETB`;
     display_transactions.innerHTML = state.transactions.map((item) => rendertransactions(item)).join("");
     if (state.current_action === "add_income") {
@@ -159,6 +163,16 @@ function setToday() {
     calendar.value = new Date().toISOString().split("T")[0];
 }
 
+function getTodayExpense() {
+    const today = new Date().toISOString().split("T")[0];
+
+    return state.transactions
+        .filter(item => {
+        return item.type === "expense" && item.dateValue === today;})
+        .reduce((total, item) => total + item.amount, 0);
+}
+
+
 function makeExpense(amount, catagory) {
     // current_balance -= amount;
     state.balance -= amount;
@@ -179,6 +193,7 @@ function makeExpense(amount, catagory) {
             type: "expense",
             catagory: catagory,
             date: formattedDate,
+            dateValue: calendar.value,
             amount: amount
         });
     }
@@ -205,6 +220,7 @@ function makeIncome(amount, catagory) {
             type: "income",
             catagory: catagory,
             date: formattedDate,
+            dateValue: calendar.value,
             amount: amount
         });
     }
@@ -234,11 +250,11 @@ function init() {
     render()
     loadState();
     current_balance = 100;
-    makeExpense(20, "Food");
-    makeIncome(100, "Salary")
-    makeIncome(40, "Refund")
+    // makeExpense(20, "Food");
+    // makeIncome(100, "Salary")
+    // makeIncome(40, "Refund")
     // clearState();
-    // render()
+    render()
 }
 
 init();
