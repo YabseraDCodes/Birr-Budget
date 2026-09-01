@@ -7,14 +7,13 @@
 body {
     font-family: 'Roboto';
     /* font-family: 'Gabriela'; */
-    /* padding: 10px; */
     background: #000;
     height: 100%;
-    /* align-items: center; */
 }
 
 .app {
     display: grid;
+    gap: 15px;
 }
 
 .head {
@@ -28,9 +27,6 @@ body {
 .icon-circle {
     width: 30px;
     height: 25px;
-    /* border-radius: 50%; */
-
-    /* background-color: #e6e6e6; */
     color: #fff;
     display: flex;
     justify-content: center;
@@ -50,7 +46,6 @@ body {
 
 .top-section h2,
 .top-section h3 {
-    /* font-family: 'Gabriela' */
     font-weight: 300;
 }
 
@@ -85,7 +80,7 @@ body {
 }
 
 .income-expense {
-    margin-top: 15px;
+    margin-top: 23px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -121,15 +116,11 @@ body {
 
 .close-btn {
     position: absolute;
-
     top: 10px;
     right: 15px;
-
     border: none;
     background: none;
-
     font-size: 28px;
-
     cursor: pointer;
 }
 
@@ -140,11 +131,8 @@ body {
     color: #000;
     width: 90%;
     max-width: 400px;
-
     padding: 25px;
     border-radius: 12px;
-
-    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
 }
 
 #transaction-form {
@@ -162,10 +150,8 @@ body {
 #transaction-form input,
 #transaction-form select {
     padding: 10px;
-
     border: 1px solid #ccc;
     border-radius: 6px;
-
     font-size: 15px;
 }
 
@@ -176,7 +162,6 @@ body {
     color: #fff;
     margin-top: 15px;
     border: none;
-    /* font-size: 13px; */
     font-weight: bold;
     transition: 0.3s ease;
 }
@@ -188,7 +173,6 @@ body {
     color: #000;
     margin-top: 15px;
     border: 1px solid black;
-    /* font-size: 13px; */
     font-weight: bold;
 }
 
@@ -214,15 +198,12 @@ body {
 .transaction-title {
     font-weight: 500;
     font-size: 15px;
-    /* margin-top: 10px; */
-    /* margin-top: 10px;
-    margin-bottom: 10px; */
 }
 
 .transaction-handler {
     background-color: #e6e6e6;
     width: 100%;
-    /* min-height: 591px; */
+    min-height: 591px;
     max-height: 558px;
     border-radius: 25px 25px 0 0;
     display: flex;
@@ -234,20 +215,6 @@ body {
     overflow-y: auto;
 }
 
-/* .transaction-handler {
-    background-color: #e6e6e6;
-    width: 100%;
-    min-height: 300px;
-    border-radius: 25px 25px 0 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    padding: 20px 25px;
-} */
-
-
 .transaction {
     padding: 7px 15px;
     display: flex;
@@ -257,12 +224,10 @@ body {
     border-radius: 10px;
 }
 
-/* icon cirlce here */
 .transaction i {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    /* background-color: #f0f0f0; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,9 +250,6 @@ body {
     font-size: 15px;
     color: rgb(87, 87, 87);
 }
-
-
-
 
 .icon-Salary {
     background-color: #e8f5e9;
@@ -314,7 +276,6 @@ body {
     color: #00897b;
 }
 
-
 .icon-Food {
     background-color: #e0f1ff;
     color: #f57c00;
@@ -340,22 +301,39 @@ body {
     color: #546e7a;
 }
 
+.delete-btn {
+    border: none;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    color: red;
+    background-color: #ffe5e5;
+}
+
+.delete-btn:active {
+    transform: scale(0.9);
+}
+
 
 @media (min-width: 768px) {
     body {
         display: flex;
         justify-content: center;
-        /* align-items: center; */
         min-height: 100vh;
     }
 
     .app {
-        /* margin-top: 20px; */
         width: 90%;
         max-width: 1200px;
         height: 100vh;
-        /* height: calc(100vh - 40px); */
-        /* min-height: 100vh; */
         grid-template-columns: 375px 1fr;
         gap: 2rem;
     }
@@ -403,7 +381,6 @@ body {
         color: #fff;
         border: 1px solid #fff;
         border-color: #fff;
-        /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); */
     }
 
     .income-expense a:active {
@@ -432,9 +409,6 @@ body {
         width: 100%;
     }
 
-    #modal-content label {
-        /* font-size: 30px; */
-    }
 
     #transaction-form {
         width: 100%;
@@ -443,8 +417,6 @@ body {
     #transaction-form input,
     #transaction-form select {
         padding: 12px;
-        /* width: 100%; */
-        /* box-sizing: border-box; */
     }
 
 
@@ -473,7 +445,6 @@ body {
     .transaction-handler {
         border-radius: 0;
         height: 90%;
-        /* flex: 1; */
         min-height: 0;
         max-height: none;
     }
@@ -482,17 +453,13 @@ body {
         width: 100%;
         padding: 13px 16px;
         margin-top: 15px;
-
         background-color: #fff;
         color: #000;
-
         border: 2px solid #fff;
         border-radius: 8px;
-
         font-size: 15px;
         font-weight: 700;
         cursor: pointer;
-
         transition: 0.2s ease;
     }
 
@@ -507,8 +474,3 @@ body {
     }
 
 }
-
-
-/* modal-content max-width needs to disapear
-if I want the higher resolution version to be
-taking entire modal width */

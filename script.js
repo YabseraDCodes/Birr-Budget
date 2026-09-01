@@ -1,9 +1,6 @@
 const state = {
     balance: 0,
     transactions: [],
-    // expense_catagories: ["Food", "Transportation", "Utilities", "Entertainment", "Shopping", "Other"],
-    // income_catagories: ["Salary", "Freelance", "Business", "Investments", "Other"],
-
     expense_catagories: [
         {
             type: "Food",
@@ -26,7 +23,6 @@ const state = {
             icon: "fa-solid fa-shapes"
         }
     ],
-
     income_catagories: [
         {
             type: "Salary",
@@ -76,22 +72,23 @@ const today_expense = document.querySelector("#today-expense");
 
 function render() {
     state.today_expense = getTodayExpense();
-    today_expense.textContent = `${state.today_expense} ETB spent today`
+    today_expense.textContent = `${state.today_expense} ETB spent today`;
     display_balance.textContent = `${state.balance} ETB`;
-    display_transactions.innerHTML = state.transactions.map((item) => rendertransactions(item)).join("");
+    display_transactions.innerHTML = state.transactions.map((item, index) => rendertransactions(item, index)).join("");
     if (state.current_action === "add_income") {
         catagory_handler.innerHTML = state.income_catagories.map((item) => {
             return renderCatagory(item);
-        });
-        form_title.textContent = "Add Income"
+        }).join("");
+        form_title.textContent = "Add Income";
     } else if (state.current_action === "make_expense") {
         catagory_handler.innerHTML = state.expense_catagories.map((item) => {
             return renderCatagory(item);
-        });
-        form_title.textContent = "Make Expense"
+        }).join("");
+        form_title.textContent = "Make Expense";
     }
     setToday();
 }
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -129,35 +126,69 @@ function renderCatagory(catagory) {
     return `<option value="${catagory.type}">${catagory.type}</option>`
 }
 
-function rendertransactions(item) {
+function rendertransactions(item, index) {
     let incomeORexpense = "";
     let color = "";
     let getIcon = "";
     if (item.type === "income") {
         incomeORexpense = "+";
         color = "rgb(0, 190, 0)";
-        getIcon = state.income_catagories.find(obj => obj.type === item.catagory);
-        console.log(getIcon.type, '-----');
+        getIcon = state.income_catagories.find(
+            obj => obj.type === item.catagory
+        );
     } else {
         incomeORexpense = "-";
         color = "red";
-        getIcon = state.expense_catagories.find(obj => obj.type === item.catagory);
-        console.log(typeof getIcon, '-----');
+        getIcon = state.expense_catagories.find(
+            obj => obj.type === item.catagory
+        );
     }
-
     if (!getIcon) {
         console.error("No matching category:", item.catagory);
     }
-
-    return `<article class="transaction">
-                <i class='${getIcon?.icon || ""} icon icon-${getIcon.type}' id='icon'></i>
-                <div class="transaction-type">
-                    <h3 class="transaction-name">${item.catagory}</h3>
-                    <p class="transaction-date">${item.date}</p>
-                </div>
-                <h3 class="transaction-money" style="color:${color};">${incomeORexpense}${item.amount}.00 ETB</h3>
-            </article>`
+    return `
+        <article class="transaction">
+            <i class="${getIcon?.icon || ""} icon icon-${getIcon?.type || "Other"}"></i>
+            <div class="transaction-type">
+                <h3 class="transaction-name">${item.catagory}</h3>
+                <p class="transaction-date">${item.date}</p>
+            </div>
+            <h3 class="transaction-money" style="color:${color};">
+                ${incomeORexpense}${item.amount}.00 ETB
+            </h3>
+            <button 
+                class="delete-btn" 
+                onclick="deleteTransaction(${index})"
+                title="Delete transaction">
+                <i class="fa-solid fa-trash"></i></button>
+        </article>
+    `;
 }
+
+
+function deleteTransaction(index) {
+    const transaction = state.transactions[index];
+    if (!transaction) {
+        return;
+    }
+    
+    const confirmDelete = confirm(
+        `Delete this ${transaction.catagory} transaction of ${transaction.amount} ETB?`
+    );
+    if (!confirmDelete) {
+        return;
+    }
+
+    if (transaction.type === "income") {
+        state.balance -= transaction.amount;
+    } else if (transaction.type === "expense") {
+        state.balance += transaction.amount;
+    }
+    state.transactions = state.transactions.filter((item, i) => i !== index);
+    saveState();
+    render();
+}
+
 
 function setToday() {
     calendar.value = new Date().toISOString().split("T")[0];
@@ -165,16 +196,22 @@ function setToday() {
 
 function getTodayExpense() {
     const today = new Date().toISOString().split("T")[0];
-
     return state.transactions
         .filter(item => {
-        return item.type === "expense" && item.dateValue === today;})
+            return item.type === "expense" && item.dateValue === today;})
         .reduce((total, item) => total + item.amount, 0);
 }
 
 
 function makeExpense(amount, catagory) {
-    // current_balance -= amount;
+    if (amount <= 0) {
+        alert("Please enter an amount greater than 0.");
+        return;
+    }
+    if (amount > state.balance) {
+        alert("You don't have enough balance for this expense.");
+        return;
+    }
     state.balance -= amount;
     const date = new Date(calendar.value);
 
@@ -203,7 +240,10 @@ function makeExpense(amount, catagory) {
 }
 
 function makeIncome(amount, catagory) {
-    // current_balance += amount;
+    if (amount <= 0) {
+        alert("Please enter an amount greater than 0.");
+        return;
+    }
     state.balance += amount;
     const date = new Date(calendar.value);
 
@@ -247,13 +287,7 @@ function clearState() {
 }
 
 function init() {
-    render()
     loadState();
-    current_balance = 100;
-    // makeExpense(20, "Food");
-    // makeIncome(100, "Salary")
-    // makeIncome(40, "Refund")
-    // clearState();
     render()
 }
 
