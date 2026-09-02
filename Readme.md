@@ -4,6 +4,12 @@ A simple expense tracker built with HTML, CSS and JavaScript.
 
 It helps you keep track of your income and expenses in one place. You can add transactions by category, see your current balance and check how much you have spent today.
 
+## Live Demo
+<a href="https://yabseradcodes.github.io/Birr-Budget/" target="_blank">
+  View Live Demo
+</a>
+
+
 ## Features
 
 - Add income and expenses
@@ -12,6 +18,7 @@ It helps you keep track of your income and expenses in one place. You can add tr
 - Track today's expenses
 - Delete transactions
 - Save your data with `localStorage`
+- Responsive design for mobile, tablet, and desktop devices
 
 ## Built With
 
