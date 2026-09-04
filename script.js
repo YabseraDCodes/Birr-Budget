@@ -1,29 +1,15 @@
 const state = {
     balance: 0,
     transactions: [],
-    expense_catagories: [
-        {
-            type: "Food",
-            icon: "fa-solid fa-burger"
-        },
-        {
-            type: "Transportation",
-            icon: "fa-solid fa-taxi"
-        },
-        {
-            type: "Utility",
-            icon: "fa-solid fa-hammer"
-        },
-        {
-            type: "Shopping",
-            icon: "fa-solid fa-basket-shopping"
-        },
-        {
-            type: "Other",
-            icon: "fa-solid fa-shapes"
-        }
-    ],
-    income_catagories: [
+    current_action: "add_income",
+    today_expense: 0,
+};
+
+// current_balance = state.balance;
+// transactions = state.transactions;
+
+const categories = {
+    income: [
         {
             type: "Salary",
             icon: "fa-solid fa-hand-holding-dollar"
@@ -50,12 +36,30 @@ const state = {
         }
     ],
 
-    current_action: "add_income",
-    today_expense: 0,
+    expense: [
+        {
+            type: "Food",
+            icon: "fa-solid fa-burger"
+        },
+        {
+            type: "Transportation",
+            icon: "fa-solid fa-taxi"
+        },
+        {
+            type: "Utility",
+            icon: "fa-solid fa-hammer"
+        },
+        {
+            type: "Shopping",
+            icon: "fa-solid fa-basket-shopping"
+        },
+        {
+            type: "Other",
+            icon: "fa-solid fa-shapes"
+        }
+    ]
 };
 
-// current_balance = state.balance;
-// transactions = state.transactions;
 
 const display_balance = document.querySelector("#balance");
 const display_transactions = document.querySelector("#transaction-handler");
@@ -76,12 +80,12 @@ function render() {
     display_balance.textContent = `${state.balance} ETB`;
     display_transactions.innerHTML = state.transactions.map((item, index) => rendertransactions(item, index)).join("");
     if (state.current_action === "add_income") {
-        catagory_handler.innerHTML = state.income_catagories.map((item) => {
+        catagory_handler.innerHTML = categories.income.map((item) => {
             return renderCatagory(item);
         }).join("");
         form_title.textContent = "Add Income";
     } else if (state.current_action === "make_expense") {
-        catagory_handler.innerHTML = state.expense_catagories.map((item) => {
+        catagory_handler.innerHTML = categories.expense.map((item) => {
             return renderCatagory(item);
         }).join("");
         form_title.textContent = "Make Expense";
@@ -133,13 +137,13 @@ function rendertransactions(item, index) {
     if (item.type === "income") {
         incomeORexpense = "+";
         color = "rgb(0, 190, 0)";
-        getIcon = state.income_catagories.find(
+        getIcon = categories.income.find(
             obj => obj.type === item.catagory
         );
     } else {
         incomeORexpense = "-";
         color = "red";
-        getIcon = state.expense_catagories.find(
+        getIcon = categories.expense.find(
             obj => obj.type === item.catagory
         );
     }
@@ -171,7 +175,7 @@ function deleteTransaction(index) {
     if (!transaction) {
         return;
     }
-    
+
     const confirmDelete = confirm(
         `Delete this ${transaction.catagory} transaction of ${transaction.amount} ETB?`
     );
@@ -198,7 +202,8 @@ function getTodayExpense() {
     const today = new Date().toISOString().split("T")[0];
     return state.transactions
         .filter(item => {
-            return item.type === "expense" && item.dateValue === today;})
+            return item.type === "expense" && item.dateValue === today;
+        })
         .reduce((total, item) => total + item.amount, 0);
 }
 
@@ -222,7 +227,7 @@ function makeExpense(amount, catagory) {
     console.log(typeof date, "----------------", formattedDate);
 
 
-    const check = state.expense_catagories.some((item) => item.type === catagory);
+    const check = categories.expense.some((item) => item.type === catagory);
     if (!check) {
         console.error("Non existing catagory");
     } else {
@@ -252,7 +257,7 @@ function makeIncome(amount, catagory) {
         month: "short"
     });
 
-    const check = state.income_catagories.some((item) => item.type === catagory);
+    const check = categories.income.some((item) => item.type === catagory);
     if (!check) {
         console.error("Non existing catagory");
     } else {

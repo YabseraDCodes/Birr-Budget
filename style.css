@@ -251,6 +251,13 @@ body {
     color: rgb(87, 87, 87);
 }
 
+.transaction h3.transaction-money{
+    flex-shrink: 0;
+    font-size: clamp(13px, 2.5vw, 15px);
+    margin: 0;
+    white-space: nowrap;
+}
+
 .icon-Salary {
     background-color: #e8f5e9;
     color: #2e7d32;
